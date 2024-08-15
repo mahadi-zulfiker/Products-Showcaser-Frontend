@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../Layout/Layout";
+import Products from "../Products/Products";
 
 
 const router = createBrowserRouter([
@@ -9,7 +10,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <div>fgf</div>
+                element: <Products></Products>
             }
         ]
     }
