@@ -8,6 +8,8 @@ const Products = () => {
     const [search, setSearch] = useState("");
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
+    const [priceRange, setPriceRange] = useState("");
+    const [sort, setSort] = useState("")
 
     const [filterOptions, setFilterOptions] = useState({});
     const [totalDataLength, setTotalDataLength] = useState(0);
@@ -16,7 +18,7 @@ const Products = () => {
     useEffect(() => {
         axios
             .get(
-                `http://localhost:3000/products/?page=${page}&search=${search}&category=${category}&brand=${brand}`
+                `http://localhost:3000/products/?page=${page}&search=${search}&sort=${sort}&category=${category}&brand=${brand}&priceRange=${priceRange}`
             )
             .then((res) => {
                 setData(res.data.data);
@@ -68,6 +70,28 @@ const Products = () => {
                                     {el}
                                 </option>
                             ))}
+                        </select>
+                        <select
+                            defaultValue=""
+                            onChange={(e) => setPriceRange(e.target.value)}
+                            className="px-2 py-1 bg-gray-200 rounded">
+                            <option disabled value="">
+                                Price range
+                            </option>
+                            <option value="0,500">$0-500</option>
+                            <option value="501,1000">$501-1000</option>
+                            <option value="1001,5000">$1000-5000</option>
+                        </select>
+                        <select
+                            defaultValue=""
+                            onChange={(e) => setSort(e.target.value)}
+                            className="px-2 py-1 bg-gray-200 rounded">
+                            <option disabled value="">
+                                Sort
+                            </option>
+                            <option value="price">Price - Low to High</option>
+                            <option value="-price">Price - High to Low</option>
+                            <option value="-createdAt">Recently added</option>
                         </select>
                     </div>
                 )}
