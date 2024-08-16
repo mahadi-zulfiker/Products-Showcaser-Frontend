@@ -18,7 +18,7 @@ const Products = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:3000/products/?page=${page}&search=${search}&sort=${sort}&category=${category}&brand=${brand}&priceRange=${priceRange}`
+        `https://product-showcaser-platform.vercel.app/products/?page=${page}&search=${search}&sort=${sort}&category=${category}&brand=${brand}&priceRange=${priceRange}`
       )
       .then((res) => {
         setData(res.data.data);
@@ -27,7 +27,7 @@ const Products = () => {
   }, [brand, category, page, priceRange, search, sort]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/products/filterOptions").then((res) => {
+    axios.get("https://product-showcaser-platform.vercel.app/products/filterOptions").then((res) => {
       setFilterOptions(res.data);
     });
   }, []);
@@ -111,11 +111,11 @@ const Products = () => {
         <h2 className="text-2xl text-center text-gray-700">No data found!!</h2>
       )}
 
-      <div className="flex justify-center items-center gap-2 py-6">
+      <div className="flex flex-wrap justify-center items-center gap-2 py-6">
         <button
           disabled={page === 1}
           onClick={() => setPage(page - 1)}
-          className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 px-4 py-2 text-white text-xl rounded shadow transition-colors">
+          className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 px-4 py-2 text-white text-lg sm:text-xl rounded shadow transition-colors">
           {"<"}
         </button>
 
@@ -123,7 +123,7 @@ const Products = () => {
           <button
             onClick={() => setPage(i + 1)}
             key={i}
-            className={`px-4 py-2 text-white text-xl rounded shadow transition-colors ${page === i + 1 ? "bg-blue-700" : "bg-blue-600 hover:bg-blue-700"
+            className={`px-3 py-2 text-white text-lg sm:text-xl rounded shadow transition-colors ${page === i + 1 ? "bg-blue-700" : "bg-blue-600 hover:bg-blue-700"
               }`}>
             {i + 1}
           </button>
@@ -132,7 +132,7 @@ const Products = () => {
         <button
           disabled={page === totalPages}
           onClick={() => setPage(page + 1)}
-          className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 px-4 py-2 text-white text-xl rounded shadow transition-colors">
+          className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 px-4 py-2 text-white text-lg sm:text-xl rounded shadow transition-colors">
           {">"}
         </button>
       </div>
@@ -141,3 +141,4 @@ const Products = () => {
 };
 
 export default Products;
+
