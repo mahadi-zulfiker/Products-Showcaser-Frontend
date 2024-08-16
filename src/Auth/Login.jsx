@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContexts } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { FaGoogle } from "react-icons/fa6";
 
 const Login = () => {
     const { continueWithGoogle, loginWithEmail } = useContext(AuthContexts);
@@ -85,11 +86,7 @@ const Login = () => {
                     onClick={handleGoogleLogin}  // Updated to handle navigation
                     className="w-full py-2 bg-[#4285F4] text-white font-medium rounded hover:bg-[#357ae8] transition duration-200 flex items-center justify-center"
                 >
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-                        alt="Google logo"
-                        className="w-5 h-5 mr-2"
-                    />
+                    <FaGoogle size={20} className="mr-2"></FaGoogle>
                     Continue with Google
                 </button>
                 <p className="text-center text-gray-600">

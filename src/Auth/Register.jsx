@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContexts } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { FaGoogle } from "react-icons/fa";
 
 const Register = () => {
     const { registerWithEmail, continueWithGoogle } = useContext(AuthContexts);
@@ -31,6 +32,7 @@ const Register = () => {
         try {
             await continueWithGoogle();
             navigate("/"); // Navigate to home page after successful Google sign-in
+            // eslint-disable-next-line no-unused-vars
         } catch (error) {
             setError("Failed to register with Google. Please try again.");
         }
@@ -105,11 +107,7 @@ const Register = () => {
                     onClick={handleGoogleRegister}
                     className="w-full py-2 bg-[#4285F4] text-white font-medium rounded hover:bg-[#357ae8] transition duration-200 flex items-center justify-center"
                 >
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-                        alt="Google logo"
-                        className="w-5 h-5 mr-2"
-                    />
+                    <FaGoogle size={20} className="mr-2"></FaGoogle>
                     Continue with Google
                 </button>
 

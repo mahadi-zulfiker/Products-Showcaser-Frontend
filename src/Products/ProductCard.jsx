@@ -1,4 +1,6 @@
+// eslint-disable-next-line react/prop-types
 const ProductCard = ({ data }) => {
+    // eslint-disable-next-line react/prop-types
     const { productName, description, category, ratings, price } = data;
 
     // Generate a random image URL for demonstration
