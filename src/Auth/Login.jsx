@@ -15,6 +15,7 @@ const Login = () => {
         try {
             await loginWithEmail(email, password);
             navigate("/"); // Navigate to home or dashboard after successful login
+        // eslint-disable-next-line no-unused-vars
         } catch (err) {
             setError("Failed to login. Please check your credentials.");
         }
@@ -24,6 +25,7 @@ const Login = () => {
         try {
             await continueWithGoogle();
             navigate("/"); // Navigate to home after successful Google login
+        // eslint-disable-next-line no-unused-vars
         } catch (error) {
             setError("Failed to login with Google. Please try again.");
         }
