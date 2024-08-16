@@ -9,7 +9,7 @@ const Products = () => {
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [priceRange, setPriceRange] = useState("");
-  const [sort, setSort] = useState("")
+  const [sort, setSort] = useState("");
 
   const [filterOptions, setFilterOptions] = useState({});
   const [totalDataLength, setTotalDataLength] = useState(0);
@@ -33,21 +33,23 @@ const Products = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-2xl mx-auto my-4">
-      <h1 className="text-center text-3xl text-black mb-4">Products Showcasing Platform</h1>
-      <div className="mb-4 flex justify-between">
+    <div className="max-w-screen-2xl mx-auto my-8 px-4">
+      <h1 className="text-center text-4xl font-semibold text-gray-800 mb-6">
+        Products Showcasing Platform
+      </h1>
+      <div className="mb-8 flex flex-col lg:flex-row items-center justify-between gap-4">
         <input
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search..."
           type="text"
-          className="bg-gray-400 px-4 py-2 outline-none placeholder:text-gray-200 rounded"
+          className="w-full lg:w-auto bg-gray-200 px-4 py-2 outline-none placeholder:text-gray-500 rounded shadow"
         />
         {filterOptions.brandNames && (
-          <div className="space-x-1 space-y-1">
+          <div className="flex flex-wrap items-center gap-4">
             <select
               onChange={(e) => setCategory(e.target.value)}
               defaultValue=""
-              className="px-2 py-1 bg-gray-200 rounded">
+              className="w-full lg:w-auto px-4 py-2 bg-gray-200 rounded shadow">
               <option disabled value="">
                 Select a category
               </option>
@@ -61,7 +63,7 @@ const Products = () => {
             <select
               defaultValue=""
               onChange={(e) => setBrand(e.target.value)}
-              className="px-2 py-1 bg-gray-200 rounded">
+              className="w-full lg:w-auto px-4 py-2 bg-gray-200 rounded shadow">
               <option disabled value="">
                 Choose a brand name
               </option>
@@ -71,10 +73,11 @@ const Products = () => {
                 </option>
               ))}
             </select>
+
             <select
               defaultValue=""
               onChange={(e) => setPriceRange(e.target.value)}
-              className="px-2 py-1 bg-gray-200 rounded">
+              className="w-full lg:w-auto px-4 py-2 bg-gray-200 rounded shadow">
               <option disabled value="">
                 Price range
               </option>
@@ -82,10 +85,11 @@ const Products = () => {
               <option value="501,1000">$501-1000</option>
               <option value="1001,5000">$1000-5000</option>
             </select>
+
             <select
               defaultValue=""
               onChange={(e) => setSort(e.target.value)}
-              className="px-2 py-1 bg-gray-200 rounded">
+              className="w-full lg:w-auto px-4 py-2 bg-gray-200 rounded shadow">
               <option disabled value="">
                 Sort
               </option>
@@ -98,20 +102,20 @@ const Products = () => {
       </div>
 
       {data.length ? (
-        <div className="p-1 md:p-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 lg:gap-3 md:gap-2 gap-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {data.map((item, i) => (
             <ProductCard data={item} key={i} />
           ))}
         </div>
       ) : (
-        <h2 className="text-2xl text-center">No data found!!</h2>
+        <h2 className="text-2xl text-center text-gray-700">No data found!!</h2>
       )}
 
-      <div className="flex justify-center gap-2 py-4">
+      <div className="flex justify-center items-center gap-2 py-6">
         <button
           disabled={page === 1}
           onClick={() => setPage(page - 1)}
-          className="bg-blue-500 disabled:bg-blue-300 px-3 py-1 text-white text-xl rounded">
+          className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 px-4 py-2 text-white text-xl rounded shadow transition-colors">
           {"<"}
         </button>
 
@@ -119,9 +123,8 @@ const Products = () => {
           <button
             onClick={() => setPage(i + 1)}
             key={i}
-            className={`bg-blue-500 px-3 py-1 text-white text-xl rounded ${
-              page === i + 1 ? "bg-blue-600" : "bg-blue-500"
-            }`}>
+            className={`px-4 py-2 text-white text-xl rounded shadow transition-colors ${page === i + 1 ? "bg-blue-700" : "bg-blue-600 hover:bg-blue-700"
+              }`}>
             {i + 1}
           </button>
         ))}
@@ -129,7 +132,7 @@ const Products = () => {
         <button
           disabled={page === totalPages}
           onClick={() => setPage(page + 1)}
-          className="bg-blue-500 disabled:bg-blue-300 px-3 py-1 text-white text-xl rounded">
+          className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 px-4 py-2 text-white text-xl rounded shadow transition-colors">
           {">"}
         </button>
       </div>
