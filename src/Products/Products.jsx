@@ -34,7 +34,7 @@ const Products = () => {
 
   return (
     <div className="max-w-screen-2xl mx-auto my-4">
-      <h1 className="text-center text-xl mb-2">Products..</h1>
+      <h1 className="text-center text-3xl text-black mb-4">Products Showcasing Platform</h1>
       <div className="mb-4 flex justify-between">
         <input
           onChange={(e) => setSearch(e.target.value)}
