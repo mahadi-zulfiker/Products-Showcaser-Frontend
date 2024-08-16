@@ -30,6 +30,7 @@ Technologies:
 - Reactjs
 - Firebase
 - Axios
+- tailwind
 
 Tips to run the website locally:
 
