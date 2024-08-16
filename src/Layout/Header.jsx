@@ -5,36 +5,38 @@ import { AuthContexts } from "../Context/AuthContext";
 
 const Header = () => {
     const navigate = useNavigate();
-    const { user } = useContext(AuthContexts);
+    const { user, logOut } = useContext(AuthContexts);
 
     return (
-        <div className="w-full bg-gray-700/20">
-            <div className="max-w-screen-2xl mx-auto py-4 flex justify-between p-1 md:p-2">
+        <header className="w-full bg-gray-700/20 shadow-md">
+            <div className="max-w-screen-2xl mx-auto py-4 px-4 flex justify-between items-center">
                 <div>
                     <Link to="/">
-                        <img
-                            className="w-12 h-12"
-                            src="https://cdn-icons-png.flaticon.com/512/2489/2489815.png"
-                            alt=""
-                        />
+                        <h1 className="text-3xl text-gray-800 font-extrabold">PSP</h1>
                     </Link>
                 </div>
-                {user.email ? (
+                {user ? (
                     <div className="flex items-center gap-2">
                         <img
                             title={user.displayName}
                             className="w-12 h-12 rounded-full"
-                            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                            alt=""
+                            src={user.photoURL || "https://cdn-icons-png.flaticon.com/512/149/149071.png"} // Use user photoURL if available
+                            alt="User"
                         />
-                        <button><img className="w-8 h-8" src="https://cdn-icons-png.flaticon.com/512/2529/2529508.png" alt="" /></button>
+                        <button
+                            onClick={logOut}
+                            aria-label="Logout"
+                        >
+                            <h2 className="font-bold">LOGOUT</h2>
+                        </button>
                     </div>
                 ) : (
                     <Button fn={() => navigate("/login")} text="Sign In" />
                 )}
             </div>
-        </div>
+        </header>
     );
 };
 
 export default Header;
+

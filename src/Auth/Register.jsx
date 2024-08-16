@@ -2,40 +2,47 @@ import { useContext, useState } from "react";
 import { AuthContexts } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-    const { continueWithGoogle, loginWithEmail } = useContext(AuthContexts);
+const Register = () => {
+    const { registerWithEmail, continueWithGoogle } = useContext(AuthContexts);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         setError("");
+
+        if (password !== confirmPassword) {
+            setError("Passwords do not match.");
+            return;
+        }
+
         try {
-            await loginWithEmail(email, password);
-            navigate("/"); // Navigate to home or dashboard after successful login
+            await registerWithEmail(email, password);
+            navigate("/"); // Navigate to home page or dashboard after successful registration
         } catch (err) {
-            setError("Failed to login. Please check your credentials.");
+            setError(err.message);
         }
     };
 
-    const handleGoogleLogin = async () => {
+    const handleGoogleRegister = async () => {
         try {
             await continueWithGoogle();
-            navigate("/"); // Navigate to home after successful Google login
+            navigate("/"); // Navigate to home page after successful Google sign-in
         } catch (error) {
-            setError("Failed to login with Google. Please try again.");
+            setError("Failed to register with Google. Please try again.");
         }
     };
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
             <form
-                onSubmit={handleLogin}
+                onSubmit={handleRegister}
                 className="bg-white shadow-md rounded-lg p-8 w-full max-w-md"
             >
-                <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Login</h2>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Register</h2>
 
                 {error && (
                     <p className="text-red-500 text-center mb-4">{error}</p>
@@ -56,7 +63,7 @@ const Login = () => {
                     />
                 </div>
 
-                <div className="mb-6">
+                <div className="mb-4">
                     <label htmlFor="password" className="text-lg font-medium text-gray-700">
                         Password:
                     </label>
@@ -71,16 +78,31 @@ const Login = () => {
                     />
                 </div>
 
+                <div className="mb-6">
+                    <label htmlFor="confirm-password" className="text-lg font-medium text-gray-700">
+                        Confirm Password:
+                    </label>
+                    <input
+                        id="confirm-password"
+                        className="w-full mt-1 border px-4 py-2 rounded focus:ring-2 focus:ring-blue-400 outline-none"
+                        placeholder="Confirm password..."
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                    />
+                </div>
+
                 <button
                     type="submit"
                     className="w-full mb-4 py-2 bg-blue-500 text-white font-medium rounded hover:bg-blue-600 transition duration-200"
                 >
-                    Login
+                    Register
                 </button>
 
                 <button
                     type="button"
-                    onClick={handleGoogleLogin}  // Updated to handle navigation
+                    onClick={handleGoogleRegister}
                     className="w-full py-2 bg-[#4285F4] text-white font-medium rounded hover:bg-[#357ae8] transition duration-200 flex items-center justify-center"
                 >
                     <img
@@ -90,13 +112,14 @@ const Login = () => {
                     />
                     Continue with Google
                 </button>
+
                 <p className="text-center text-gray-600">
-                    Do you not have an account? <a href="/register" className="text-blue-500 hover:underline">Register here</a>
+                    Already have an account? <a href="/login" className="text-blue-500 hover:underline">Login here</a>
                 </p>
             </form>
         </div>
     );
 };
 
-export default Login;
+export default Register;
 
